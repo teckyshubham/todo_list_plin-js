@@ -4,8 +4,95 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="todolist1.css">
-<style type="text/css"></style>
+	<!-- <link rel="stylesheet" type="text/css" href="todolist1.css"> -->
+<style type="text/css">
+	.container{
+    height: auto;
+    width: 50%;
+    border: 2px solid black;
+    margin-left: 320px;
+    margin-top: 200px;
+    background-color: #e2fdfd;
+        background-image: linear-gradient( 100deg, #edc9f3 0%, #a994db5e 74%);
+
+}
+body{
+    background-image: linear-gradient(110deg, #2857a4 0%, #403066 74%);
+
+}
+#todo-input{
+    /*margin-left: ;*/
+       /* margin-left: 200px;
+    width: 239px;
+    height: 38px;*/
+    margin-left: 61px;
+    width: 316px;
+    height: 52px;
+}
+#todo-btn{
+        width: 112px;
+    height: 57px;
+    margin-left: -5px;
+    border: none;
+    background-color: green;
+}
+.container ul{
+    list-style: none;
+    padding: 0px;
+}
+.container li {
+        color: black;
+    margin-left: 61px;
+    margin-top: 14px;
+    border: 2px solid #cb9494;
+    border-block-width: 8px;
+    border-width: 12px;
+    background-color: #8794b9;
+}
+.container li span{
+    float: right;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+        background-color: #ff2d18;
+    width: 30px;
+    text-align: center;
+    height: 22px;
+    margin-top: -32px;
+
+}
+.container #error{
+    color: #ff032d;
+    font-size: 15px;
+    margin-left: 62px;
+}
+
+input[type="checkbox" i] {
+    width: 1em;
+    height: 1em;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    
+}
+.container li .highlight{
+    background-color: white;
+    color: red;
+
+    margin-left: 61px;
+    margin-top: 14px;
+    border: 2px solid #91ff22;
+    border-block-width: 8px;
+    border-width: 12px;
+    /* background-color: #8794b9; */
+}
+.paragraph{
+    
+    margin-left: 59px;
+    margin-top: -17px;
+}
+</style>
 </head>
 <body>
 	<!-- <h2>To Do LIST</h2> -->
@@ -18,6 +105,66 @@
 		<span id="error"></span>
 		<ul id="todo-list"></ul>
 	</div>
-<script src="todolist4.js"></script>
+<script >
+	var list=document.getElementById("todo-list");
+var addBtn=document.getElementById("todo-btn");
+var addInput=document.getElementById("todo-input");
+function createTodo(){
+
+    var text=addInput.value;
+
+    if(text==""){
+        document.getElementById('error').innerHTML="Please add the value";
+        return;
+    }
+    var li=document.createElement('li');
+
+    var checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
+    checkbox.classList.add("checkbox");
+
+    var paragraph = document.createElement('p');
+    paragraph.textContent = text;
+    paragraph.classList.add("paragraph");
+
+    var remove = document.createElement('span');
+    remove.innerHTML="*";
+    remove.classList.add("remove");
+
+    li.appendChild(checkbox);
+    li.appendChild(paragraph);
+    li.appendChild(remove);
+    list.appendChild(li);
+    addInput.value="";
+}
+function removeTodos(removeElemet){
+    removeElemet.parentElement.remove();
+}
+function toggleComplete(element){
+    if(element.checked===true){
+        element.parentElement.style.background="red";
+    }else{
+        element.parentElement.style.background="#8794b9";
+    }
+}
+list.addEventListener("click",function(event){
+    switch(event.target.tagName){
+        case "P":
+            showEditInput();
+            break;
+        case "SPAN":
+            removeTodos(event.target);
+            break;
+    }
+});
+list.addEventListener("change",function(event){
+    if(event.target.tagName==="INPUT"&&event.target.type==="checkbox"){
+        toggleComplete(event.target);
+    }
+});
+
+
+addBtn.addEventListener("click",createTodo);
+</script>
 </body>
 </html>
