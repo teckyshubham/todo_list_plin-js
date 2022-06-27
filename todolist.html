@@ -103,22 +103,27 @@ input[type="checkbox" i] {
 		<button value="ADD" id="todo-btn" >ADD</button><br>
 
 		<span id="error"></span>
-		<ul id="todo-list"></ul>
+		<ul id="todo-list">
+            <!-- checkbox  for switch-->
+            <!-- paragraph -->
+            <!-- span for delete -->
+        </ul>
 	</div>
 <script >
+    // fetching 
 	var list=document.getElementById("todo-list");
 var addBtn=document.getElementById("todo-btn");
 var addInput=document.getElementById("todo-input");
 function createTodo(){
 
     var text=addInput.value;
-
+// check for null value
     if(text==""){
         document.getElementById('error').innerHTML="Please add the value";
         return;
     }
     var li=document.createElement('li');
-
+// list content
     var checkbox = document.createElement('input');
     checkbox.type = "checkbox";
     checkbox.classList.add("checkbox");
@@ -130,7 +135,7 @@ function createTodo(){
     var remove = document.createElement('span');
     remove.innerHTML="*";
     remove.classList.add("remove");
-
+// add ti li and then to list
     li.appendChild(checkbox);
     li.appendChild(paragraph);
     li.appendChild(remove);
@@ -140,6 +145,7 @@ function createTodo(){
 function removeTodos(removeElemet){
     removeElemet.parentElement.remove();
 }
+// toggle backgroung color on click
 function toggleComplete(element){
     if(element.checked===true){
         element.parentElement.style.background="red";
@@ -157,6 +163,7 @@ list.addEventListener("click",function(event){
             break;
     }
 });
+// toggle handle
 list.addEventListener("change",function(event){
     if(event.target.tagName==="INPUT"&&event.target.type==="checkbox"){
         toggleComplete(event.target);
